@@ -6,7 +6,7 @@ $ git init - pasta atual
 $ git init meu-repos - cria pasta
 
 $ git clone "chave ssh" nome-do-diretorio
-$ git clone my-url meu-repos
+$ git clone my-url meu-repositorio
 
 $ git status - lista de gits a serem comitados
 $ git add . - adiciona todos arquivos
