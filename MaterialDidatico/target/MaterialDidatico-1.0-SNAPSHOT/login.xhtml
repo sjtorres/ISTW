@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>LOGIN</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div style="position:absolute; left:40%; top:40%; margin-left:-110px; margin-top:-40px;">
+                <p:panel header="Login de acesso" style="width:50%; margin: 0 auto;font-size: small;">
+                    <p:outputLabel value="Login:" for="login" style="font-size: small;"/>
+                    <p:inputText id="login" value="#{loginControle.login}" style="width:90%;">
+                        <p:focus for="login"/>
+                    </p:inputText>
+                    <p:outputLabel value="Senha:" for="senha" style="font-size: small;"/>
+                    <p:password id="senha" value="#{loginControle.senha}" style="width:90%;"/>
+                    <f:facet name="footer">
+                        <p:commandButton value="Acessar" icon="fa fa-unlock" style="font-size: small;"
+                                         action="#{loginControle.logar()}"
+                                         ajax="false"/>
+                        <p:commandButton value="Cadastro" icon="fa fa-share" style="font-size: small;"
+                                         ajax="false" immediate="true"/>
+                        <p:messages style="font-size: small;" closable="true"/>
+                    </f:facet>
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>
