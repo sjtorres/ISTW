@@ -26,3 +26,5 @@ $ git merge nome-do-branch - incorpora mudanças
 $ git pull - baixa e incorpora mudanças no remoto
 $ git push - envia commits locais para repos. remoto
 $ git fetch - baixa mudanças feitas no remoto
+
+teste
