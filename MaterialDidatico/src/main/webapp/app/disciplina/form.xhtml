@@ -10,8 +10,8 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:panelGroup rendered="#{cursoControle.layoutForm}">
-        <h:form id="formCurso">
+    <h:panelGroup rendered="#{disciplinaControle.layoutForm}">
+        <h:form id="formDisciplina">
             <p:panel header="Cadastro de Disciplina" style="font-size: small;font-family: cursive;">
                 <h:panelGrid id="painelGeral" columns="2">
 
@@ -19,15 +19,15 @@ and open the template in the editor.
                     <p:inputText id="nome" style="width:90%;"
                                  required="true"
                                  requiredMessage="O Nome é obrigatório"
-                                 value="#{cursoControle.entidade.nome}">
+                                 value="#{disciplinaControle.entidade.nome}">
                         <p:focus for="nome"/>
                     </p:inputText>
-
+                    
                 </h:panelGrid>
 
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;font-family: cursive;"
-                                     action="#{cursoControle.salvar()}"
+                                     action="#{disciplinaControle.salvar()}"
                                      ajax="false"/>
 
                     <p:commandButton value="Voltar" icon="fa fa-share" style="font-size: small;font-family: cursive;"
