@@ -6,7 +6,6 @@
 package br.com.sistemaM.entidade;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import org.hibernate.envers.Audited;
 
 /**
@@ -35,13 +33,6 @@ public class Disciplina implements Serializable {
     private Long id;
     @Column(name = "dis_nome", nullable = false)
     private String nome;
-    @Column(name = "dis_nomearq", nullable = false)
-    private String nomearq;
-    @Column(name = "dis_formato", nullable = false)
-    private String formato;
-    @Column(name = "dis_data_cadastro", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataCadastro;
     @Column(name = "dis_cod_acesso", nullable = false)
     private String codAcesso;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -62,30 +53,6 @@ public class Disciplina implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getNomearq() {
-        return nomearq;
-    }
-
-    public void setNomearq(String nomearq) {
-        this.nomearq = nomearq;
-    }
-
-    public String getFormato() {
-        return formato;
-    }
-
-    public void setFormato(String formato) {
-        this.formato = formato;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
     }
 
     public String getCodAcesso() {

@@ -15,9 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import br.com.sistemaM.utils.Criptografia;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import org.hibernate.envers.Audited;
 
 /**
@@ -45,9 +42,6 @@ public class Usuario implements Serializable {
     @Column(name = "usu_nivel", nullable = false)
     @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "curso_id", nullable = false)
-    private Curso curso;
 
     public Long getId() {
         return id;
@@ -95,14 +89,6 @@ public class Usuario implements Serializable {
 
     public void setNivelAcesso(NivelAcesso nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
     }
 
     @Override

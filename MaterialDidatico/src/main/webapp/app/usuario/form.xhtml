@@ -60,19 +60,6 @@ and open the template in the editor.
                                        itemLabel="#{nivel.descricao}"/>
                     </p:selectOneMenu>
                     
-                    <p:outputLabel value="Curso:" for="curso"/>
-                    <p:panel>
-                        <p:autoComplete id="curso" maxResults="5" dropdown="true"
-                                        completeMethod="#{cursoControle.AutoCompletePorNome}" 
-                                        value="#{usuarioControle.entidade.curso}"
-                                        converter="#{cursoControle.converter()}"
-                                        var="item"
-                                        itemLabel="#{item.nome}"
-                                        itemValue="#{item}"/>
-                        <p:commandButton icon="fa fa-plus" style="font-size: small;"
-                                         action="#{usuarioControle.cadastroCurso()}"
-                                         ajax="false" immediate="true"/>
-                    </p:panel>
                 </h:panelGrid>
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;"

@@ -6,6 +6,7 @@
 package br.com.sistemaM.entidade;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import org.hibernate.envers.Audited;
 
 /**
@@ -33,6 +35,13 @@ public class Material implements Serializable {
     private Long id;
     @Column(name = "mat_nome", nullable = false)
     private String nome;
+    @Column(name = "dis_nomearq", nullable = false)
+    private String nomearq;
+    @Column(name = "dis_formato", nullable = false)
+    private String formato;
+    @Column(name = "dis_data_cadastro", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataCadastro;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dis_id", nullable = false)
     private Disciplina disciplina;
@@ -43,6 +52,30 @@ public class Material implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNomearq() {
+        return nomearq;
+    }
+
+    public void setNomearq(String nomearq) {
+        this.nomearq = nomearq;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public String getNome() {

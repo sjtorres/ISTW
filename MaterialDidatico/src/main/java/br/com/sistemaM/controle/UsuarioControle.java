@@ -26,8 +26,6 @@ public class UsuarioControle extends AbstractControle<Usuario>  implements Seria
     private Usuario usuario;
     @Inject
     private UsuarioFacade usuarioFacade;
-    @Inject
-    private CursoControle cursoControle;
     
     public UsuarioControle() {
         super(Usuario.class);
@@ -52,11 +50,6 @@ public class UsuarioControle extends AbstractControle<Usuario>  implements Seria
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    public String cadastroCurso() {
-        cursoControle.alterar();
-        return "/app/curso/list?faces-redirect=true";
     }
 
 }
