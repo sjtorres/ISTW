@@ -56,5 +56,10 @@ public abstract class AbstractFacade<T> implements Serializable {
         Query q = getEm().createQuery("FROM " + classe.getSimpleName() + " AS t WHERE t.id = '" + id + "'");
         return q.getResultList();
     }
+    
+    public List<T> AutoCompletePorNome(String nome) {
+        Query q = getEm().createQuery("FROM " + classe.getSimpleName() + " AS t WHERE t.nome LIKE ('%" + nome + "%')");
+        return q.getResultList();
+    }
 
 }

@@ -90,6 +90,10 @@ public abstract class AbstractControle<T> implements Serializable {
     public List<T> AutoComplete(Long id) {
         return getFacade().AutoComplete(id);
     }
+    
+    public List<T> AutoCompletePorNome(String nome) {
+        return getFacade().AutoCompletePorNome(nome);
+    }
 
     public ConverterGenerico converter() {
         if (converterGenerico == null) {
