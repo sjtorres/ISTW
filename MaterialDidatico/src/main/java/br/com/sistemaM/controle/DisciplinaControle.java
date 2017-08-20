@@ -24,6 +24,8 @@ public class DisciplinaControle extends AbstractControle<Disciplina> implements 
     @Inject
     private DisciplinaFacade habilidadeFacade;
     private Disciplina habilidade;
+    @Inject
+    private CursoControle cursoControle;
 
     public DisciplinaControle() {
         super(Disciplina.class);
@@ -40,6 +42,11 @@ public class DisciplinaControle extends AbstractControle<Disciplina> implements 
 
     public void setHabilidade(Disciplina habilidade) {
         this.habilidade = habilidade;
+    }
+        
+    public String cadastroCurso() {
+        cursoControle.alterar();
+        return "/app/curso/list?faces-redirect=true";
     }
 
 }
