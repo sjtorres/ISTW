@@ -13,9 +13,17 @@ and open the template in the editor.
 
     <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="conteudo">
-            <img src="imagens/603340527_preview_571767.jpg" alt="" width="100%"/>
-        </ui:define>
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage name="imagens/logo-300.png" />
+                    <h:outputText
+                        value="The story begins as Don Vito Corleone..." />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
 
     </ui:composition>
 
