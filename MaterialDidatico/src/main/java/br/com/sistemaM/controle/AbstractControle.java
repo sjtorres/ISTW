@@ -51,6 +51,13 @@ public abstract class AbstractControle<T> implements Serializable {
         layoutForm = true;
         layoutView = false;
     }
+    
+    public void voltar(){
+        entidade = null;
+        layoutList = true;
+        layoutForm = false;
+        layoutView = false;
+    }
 
     public String salvar() {
         try {

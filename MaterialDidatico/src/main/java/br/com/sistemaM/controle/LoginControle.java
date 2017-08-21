@@ -31,18 +31,18 @@ public class LoginControle implements Serializable {
     private Boolean logado = false;
 
     public String logar() {
-//        usuario = usuarioFacade.pesquisaUsuario(login, senha);
-//        if (usuario != null) {
+        usuario = usuarioFacade.pesquisaUsuario(login, senha);
+        if (usuario != null) {
             logado = true;
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-Vindo ao Sistema", "");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "/index";
-//        } else {
-//            logado = false;
-//            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário não encontrado no sistema", "");
-//            FacesContext.getCurrentInstance().addMessage(null, message);
-//        }
-//        return null;
+        } else {
+            logado = false;
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário não encontrado no sistema", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        return null;
     }
 
     public String logoff() {
