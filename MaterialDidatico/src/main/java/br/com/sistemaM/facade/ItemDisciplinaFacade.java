@@ -5,7 +5,7 @@
  */
 package br.com.sistemaM.facade;
 
-import br.com.sistemaM.entidade.Disciplina;
+import br.com.sistemaM.entidade.ItemDisciplina;
 import br.com.sistemaM.persistencia.Transacional;
 import java.io.Serializable;
 import javax.inject.Inject;
@@ -17,22 +17,17 @@ import javax.persistence.Query;
  * @author tiago
  */
 @Transacional
-public class DisciplinaFacade extends AbstractFacade<Disciplina> implements Serializable{
+public class ItemDisciplinaFacade extends AbstractFacade<ItemDisciplina> implements Serializable{
     
     @Inject
     private EntityManager em;
 
-    public DisciplinaFacade() {
-        super(Disciplina.class);
+    public ItemDisciplinaFacade() {
+        super(ItemDisciplina.class);
     }
 
     @Override
     public EntityManager getEm() {
         return em;
-    }
-    
-    public Disciplina BuscarDisciplinaPeloCodAcesso(String codAcesso) {
-        Query q = em.createQuery("FROM Disciplina AS d WHERE d.codAcesso = '" + codAcesso + "'");
-        return (Disciplina) q.getSingleResult();
     }
 }

@@ -13,7 +13,7 @@ and open the template in the editor.
     <h:panelGroup rendered="#{disciplinaControle.layoutForm}">
         <h:form id="formDisciplina">
             <p:panel header="Cadastro de Disciplina" style="font-size: small;font-family: cursive;">
-                <h:panelGrid id="painelGeral" columns="2">
+                <h:panelGrid id="painelProfessor" columns="2" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}">
 
                     <p:outputLabel value="Nome:" for="nome" style="font-size: small;font-family: cursive;"/>
                     <p:inputText id="nome" style="width:90%;"
@@ -23,6 +23,12 @@ and open the template in the editor.
                         <p:focus for="nome"/>
                     </p:inputText>
                     
+                    <p:outputLabel value="Código de Acesso:" for="codAcessoPro" style="font-size: small;font-family: cursive;"/>
+                    <p:inputText id="codAcessoPro" style="width:90%;"
+                                 required="true"
+                                 requiredMessage="O Código de Acesso é obrigatório"
+                                 value="#{disciplinaControle.entidade.codAcesso}"/>
+
                     <p:outputLabel value="Curso:" for="curso"/>
                     <p:panel>
                         <p:autoComplete id="curso" maxResults="5" dropdown="true"
@@ -38,13 +44,47 @@ and open the template in the editor.
                     </p:panel>
                 </h:panelGrid>
 
+                <h:panelGrid id="painelAluno" columns="2" rendered="#{loginControle.usuario.nivelAcesso=='ALUNO'}">
+
+                    <p:outputLabel value="Código de Acesso:" for="codAcesso"/>
+                    <p:inputText id="codAcesso" value="#{disciplinaControle.codAcesso}"/>
+
+                    <f:facet name="footer">
+                        <p:commandButton id="bottaoAdicionarDisciplina" value="ADICIONAR" icon="fa fa-plus" 
+                                         action="#{disciplinaControle.addItem()}" style="font-size: small;"
+                                         ajax="false"/>
+                    </f:facet>
+                </h:panelGrid>
+
+                <p:panel id="painelDisciplina" header="DISCIPLINAS" rendered="#{loginControle.usuario.nivelAcesso=='ALUNO'}">
+                    <p:dataTable value="#{disciplinaControle.entidade.itensDisciplina}" 
+                                 var="item" 
+                                 emptyMessage="Disciplinas não encontradas"
+                                 editable="true"
+                                 reflow="true">
+
+                        <p:column headerText="Disciplina">
+                            <h:outputText value="#{item.disciplina.nome}"/>
+                        </p:column>
+                        <p:column headerText="Código de Acesso">
+                            <h:outputText value="#{item.disciplina.codAcesso}"/>
+                        </p:column>
+                        <p:column headerText="Remover" width="150" style="text-align:center">
+                            <p:commandButton icon="fa fa-times"
+                                             action="#{disciplinaControle.entidade.removeItem(item)}"
+                                             ajax="false"
+                                             style="font-size: small;"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;font-family: cursive;"
                                      action="#{disciplinaControle.salvar()}"
                                      ajax="false"/>
 
                     <p:commandButton value="Voltar" icon="fa fa-share" style="font-size: small;font-family: cursive;"
-                                     action="list?faces-redirect=true"
+                                     action="#{disciplinaControle.voltar()}"
                                      ajax="false" immediate="true"/>
                 </f:facet>
             </p:panel>
