@@ -5,6 +5,7 @@
  */
 package br.com.sistemaM.entidade;
 
+import br.com.sistemaM.enums.NivelAcesso;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

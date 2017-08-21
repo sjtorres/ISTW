@@ -5,7 +5,7 @@
  */
 package br.com.sistemaM.controle;
 
-import br.com.sistemaM.entidade.NivelAcesso;
+import br.com.sistemaM.enums.NivelAcesso;
 import br.com.sistemaM.entidade.Usuario;
 import br.com.sistemaM.facade.AbstractFacade;
 import br.com.sistemaM.facade.UsuarioFacade;
