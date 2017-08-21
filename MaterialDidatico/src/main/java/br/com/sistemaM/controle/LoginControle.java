@@ -13,7 +13,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -50,6 +49,27 @@ public class LoginControle implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saindo do Sistema", "");
         FacesContext.getCurrentInstance().addMessage(null, message);
         return "/login";
+    }
+
+    public String cadastroUsuario() {
+        usuario = new Usuario();
+        return "/usuario";
+    }
+
+    public String salvar() {
+        try {
+            usuarioFacade.salvar(usuario);
+            logado = true;
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-Vindo ao Sistema", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "/index";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logado = false;
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao salvar Usuário no sistema", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        return null;
     }
 
     public Boolean getLogado() {
