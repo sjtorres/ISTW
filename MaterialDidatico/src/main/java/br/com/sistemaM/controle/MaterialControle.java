@@ -22,8 +22,8 @@ import javax.inject.Named;
 public class MaterialControle extends AbstractControle<Material> implements Serializable {
 
     @Inject
-    private MaterialFacade habilidadeFacade;
-    private Material habilidade;
+    private MaterialFacade materialFacade;
+    private Material material;
 
     public MaterialControle() {
         super(Material.class);
@@ -31,15 +31,15 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
 
     @Override
     public AbstractFacade<Material> getFacade() {
-        return habilidadeFacade;
-    }
-    
-    public Material getHabilidade() {
-        return habilidade;
+        return materialFacade;
     }
 
-    public void setHabilidade(Material habilidade) {
-        this.habilidade = habilidade;
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
 }
