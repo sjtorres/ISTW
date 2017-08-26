@@ -53,7 +53,7 @@ public class LoginControle implements Serializable {
 
     public String cadastroUsuario() {
         usuario = new Usuario();
-        return "/usuario";
+        return "usuario.xhtml";
     }
 
     public String salvar() {
