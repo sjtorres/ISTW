@@ -35,11 +35,11 @@ public class Material implements Serializable {
     private Long id;
     @Column(name = "mat_nome", nullable = false)
     private String nome;
-    @Column(name = "dis_nomearq", nullable = false)
+    @Column(name = "mat_nomearq", nullable = false)
     private String nomearq;
-    @Column(name = "dis_formato", nullable = false)
+    @Column(name = "mat_formato", nullable = false)
     private String formato;
-    @Column(name = "dis_data_cadastro", nullable = false)
+    @Column(name = "mat_data_cadastro", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
     @ManyToOne(cascade = CascadeType.ALL)
