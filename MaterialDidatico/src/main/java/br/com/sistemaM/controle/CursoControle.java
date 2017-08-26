@@ -22,8 +22,8 @@ import javax.inject.Named;
 public class CursoControle extends AbstractControle<Curso> implements Serializable {
 
     @Inject
-    private CursoFacade habilidadeFacade;
-    private Curso habilidade;
+    private CursoFacade cursoFacade;
+    private Curso curso;
 
     public CursoControle() {
         super(Curso.class);
@@ -31,15 +31,15 @@ public class CursoControle extends AbstractControle<Curso> implements Serializab
 
     @Override
     public AbstractFacade<Curso> getFacade() {
-        return habilidadeFacade;
-    }
-    
-    public Curso getHabilidade() {
-        return habilidade;
+        return cursoFacade;
     }
 
-    public void setHabilidade(Curso habilidade) {
-        this.habilidade = habilidade;
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
 }
