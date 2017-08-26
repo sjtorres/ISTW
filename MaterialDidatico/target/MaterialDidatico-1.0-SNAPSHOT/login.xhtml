@@ -23,7 +23,6 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-        <h:form>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -31,7 +30,7 @@ and open the template in the editor.
                         <div class="account-wall" style="padding: 25px;">
                             <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                                  alt=""/>
-                            <form class="form-signin">
+                            <h:form styleClass="form-signin">
                                 <p:inputText styleClass="form-control" id="login" placeholder="Usuário" value="#{loginControle.login}">
                                     <p:focus for="login"/>
                                 </p:inputText>
@@ -45,13 +44,12 @@ and open the template in the editor.
                                     Lembre de Mim
                                 </label>
                                 <a href="#" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
-                            </form>
+                            </h:form>
                         </div>
                         <a href="#{loginControle.cadastroUsuario()}" class="text-center new-account">Crie a sua conta aqui! </a>
                     </div>
                 </div>
             </div>
-        </h:form>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
