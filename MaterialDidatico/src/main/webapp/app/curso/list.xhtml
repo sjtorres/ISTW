@@ -16,7 +16,7 @@ and open the template in the editor.
             <h:panelGroup rendered="#{cursoControle.layoutList}">
                 <h:form>
                     <p:panel header="CURSO" style="font-size: small;font-family: cursive; text-align: center;">
-                        <p:dataTable id="disciplina" value="#{cursoControle.listar}"
+                        <p:dataTable id="curso" value="#{cursoControle.listar}"
                                      var="item" style="font-size: small;font-family: cursive;"
                                      paginator="true" rows="10"
                                      paginatorPosition="bottom"
@@ -57,7 +57,7 @@ and open the template in the editor.
                                                  disabled="#{cursoControle.entidade==null}"
                                                  value="Excluir"
                                                  action="#{cursoControle.excluir()}"
-                                                 ajax="false">
+                                                 update="message curso">
 
                                     <p:confirm header="Confirmação" 
                                                message="Deseja excluir o registro?" 

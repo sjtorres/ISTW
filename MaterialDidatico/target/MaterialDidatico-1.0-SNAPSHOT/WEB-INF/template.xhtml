@@ -20,7 +20,7 @@ and open the template in the editor.
         </div>
     </h:head>
     <h:body>
-        <p:messages style="font-size: small;" autoUpdate="true" closable="true"/>
+        <p:messages id="message" autoUpdate="true" closable="true"/>
         <h:form>
             <p:menubar>
                 <p:menuitem value="Home" icon="fa fa-home"  style="font-size: small;"
@@ -29,11 +29,11 @@ and open the template in the editor.
                     <p:menuitem value="Usuário" icon="fa fa-users" style="font-size: small;"
                                 url="/app/usuario/list.xhtml"/>
                     <p:menuitem value="Curso" icon="fa fa-users" style="font-size: small;"
-                                url="/app/curso/list.xhtml"/>
+                                url="/app/curso/list.xhtml" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
                     <p:menuitem value="Disciplina" icon="fa fa-users" style="font-size: small;"
                                 url="/app/disciplina/list.xhtml"/>
                     <p:menuitem value="Material" icon="fa fa-users" style="font-size: small;"
-                                url="/app/material/list.xhtml"/>
+                                url="/app/material/list.xhtml" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
                 </p:submenu>
                 <p:menuitem value="Logar" icon="fa fa-unlock" style="font-size: small;" rendered="#{loginControle.logado!=true}"
                             url="/login.xhtml"/>

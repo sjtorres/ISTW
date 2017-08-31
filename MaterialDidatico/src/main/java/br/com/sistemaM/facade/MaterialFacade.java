@@ -8,8 +8,10 @@ package br.com.sistemaM.facade;
 import br.com.sistemaM.entidade.Material;
 import br.com.sistemaM.persistencia.Transacional;
 import java.io.Serializable;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,5 +31,15 @@ public class MaterialFacade extends AbstractFacade<Material> implements Serializ
     public EntityManager getEm() {
         return em;
     }
-      
+    
+    public List<Material> listarProfessor(String login) {
+        Query q = em.createQuery("FROM Material AS m INNER JOIN m.disciplina AS d WHERE d.usuario.login = '" + login + "'");
+        return q.getResultList();
+    }
+    
+    public List<Material> listarAluno(String login) {
+//        falta fazer
+        Query q = em.createQuery("FROM Material AS m");
+        return q.getResultList();
+    }
 }

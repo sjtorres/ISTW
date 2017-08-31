@@ -12,52 +12,63 @@ and open the template in the editor.
 
     <h:panelGroup rendered="#{disciplinaControle.layoutForm}">
         <h:form id="formDisciplina">
-            <p:panel header="Cadastro de Disciplina" style="font-size: small;font-family: cursive;">
-                <h:panelGrid id="painelProfessor" columns="2" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}">
+            <p:panel header="Cadastro de Disciplina" style="font-size: small;" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}">
+                <h:panelGrid id="painelProfessor" columns="2">
 
-                    <p:outputLabel value="Nome:" for="nome" style="font-size: small;font-family: cursive;"/>
+                    <p:outputLabel value="Nome:" for="nome"/>
                     <p:inputText id="nome" style="width:90%;"
                                  required="true"
                                  requiredMessage="O Nome é obrigatório"
                                  value="#{disciplinaControle.entidade.nome}">
                         <p:focus for="nome"/>
                     </p:inputText>
-                    
-                    <p:outputLabel value="Código de Acesso:" for="codAcessoPro" style="font-size: small;font-family: cursive;"/>
-                    <p:inputText id="codAcessoPro" style="width:90%;"
-                                 required="true"
-                                 requiredMessage="O Código de Acesso é obrigatório"
-                                 value="#{disciplinaControle.entidade.codAcesso}"/>
+
+                    <p:outputLabel value="Professor:" for="professor"/>
+                    <p:autoComplete id="professor" maxResults="5" dropdown="true"
+                                    completeMethod="#{usuarioControle.autoCompleteProfessor}" 
+                                    value="#{disciplinaControle.entidade.usuario}"
+                                    converter="#{usuarioControle.converter()}"
+                                    var="item"
+                                    itemLabel="#{item.nome}"
+                                    itemValue="#{item}"/>
 
                     <p:outputLabel value="Curso:" for="curso"/>
-                    <p:panel>
-                        <p:autoComplete id="curso" maxResults="5" dropdown="true"
-                                        completeMethod="#{cursoControle.AutoCompletePorNome}" 
-                                        value="#{disciplinaControle.entidade.curso}"
-                                        converter="#{cursoControle.converter()}"
-                                        var="item"
-                                        itemLabel="#{item.nome}"
-                                        itemValue="#{item}"/>
-                        <p:commandButton icon="fa fa-plus" style="font-size: small;"
-                                         action="#{disciplinaControle.cadastroCurso()}"
-                                         ajax="false" immediate="true"/>
-                    </p:panel>
+                    <p:autoComplete id="curso" maxResults="5" dropdown="true"
+                                    completeMethod="#{cursoControle.AutoCompletePorNome}" 
+                                    value="#{disciplinaControle.entidade.curso}"
+                                    converter="#{cursoControle.converter()}"
+                                    var="item"
+                                    itemLabel="#{item.nome}"
+                                    itemValue="#{item}"/>
                 </h:panelGrid>
 
-                <h:panelGrid id="painelAluno" columns="2" rendered="#{loginControle.usuario.nivelAcesso=='ALUNO'}">
+                <f:facet name="footer">
+                    <p:commandButton value="Salvar" icon="fa fa-save"
+                                     action="#{disciplinaControle.salvar()}"
+                                     ajax="false"/>
+
+                    <p:commandButton value="Voltar" icon="fa fa-share"
+                                     action="#{disciplinaControle.voltar()}"
+                                     ajax="false" immediate="true"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+        <h:form id="formDisciplinaAluno">
+            <p:panel id="aluno" header="Cadastro de Disciplina" style="font-size: small;" rendered="#{loginControle.usuario.nivelAcesso=='ALUNO'}">
+                <h:panelGrid id="painelAluno" columns="2">
 
                     <p:outputLabel value="Código de Acesso:" for="codAcesso"/>
-                    <p:inputText id="codAcesso" value="#{disciplinaControle.codAcesso}"/>
+                    <p:inputText id="codAcesso" value="#{usuarioControle.codAcesso}"/>
 
                     <f:facet name="footer">
                         <p:commandButton id="bottaoAdicionarDisciplina" value="ADICIONAR" icon="fa fa-plus" 
-                                         action="#{disciplinaControle.addItem()}" style="font-size: small;"
+                                         action="#{usuarioControle.addItem()}"
                                          ajax="false"/>
                     </f:facet>
                 </h:panelGrid>
 
-                <p:panel id="painelDisciplina" header="DISCIPLINAS" rendered="#{loginControle.usuario.nivelAcesso=='ALUNO'}">
-                    <p:dataTable value="#{disciplinaControle.entidade.itensDisciplina}" 
+                <p:panel id="painelDisciplina" header="DISCIPLINAS">
+                    <p:dataTable value="#{usuarioControle.entidade.itensDisciplina}" 
                                  var="item" 
                                  emptyMessage="Disciplinas não encontradas"
                                  editable="true"
@@ -66,24 +77,26 @@ and open the template in the editor.
                         <p:column headerText="Disciplina">
                             <h:outputText value="#{item.disciplina.nome}"/>
                         </p:column>
-                        <p:column headerText="Código de Acesso">
-                            <h:outputText value="#{item.disciplina.codAcesso}"/>
+                        <p:column headerText="Curso">
+                            <h:outputText value="#{item.disciplina.curso.nome}"/>
+                        </p:column>
+                        <p:column headerText="Professor">
+                            <h:outputText value="#{item.disciplina.usuario.nome}"/>
                         </p:column>
                         <p:column headerText="Remover" width="150" style="text-align:center">
                             <p:commandButton icon="fa fa-times"
-                                             action="#{disciplinaControle.entidade.removeItem(item)}"
+                                             action="#{usuarioControle.entidade.removeItem(item)}"
                                              ajax="false"
                                              style="font-size: small;"/>
                         </p:column>
                     </p:dataTable>
                 </p:panel>
-
                 <f:facet name="footer">
-                    <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;font-family: cursive;"
-                                     action="#{disciplinaControle.salvar()}"
+                    <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;"
+                                     action="#{usuarioControle.salvar()}" update="message"
                                      ajax="false"/>
 
-                    <p:commandButton value="Voltar" icon="fa fa-share" style="font-size: small;font-family: cursive;"
+                    <p:commandButton value="Voltar" icon="fa fa-share" style="font-size: small;"
                                      action="#{disciplinaControle.voltar()}"
                                      ajax="false" immediate="true"/>
                 </f:facet>

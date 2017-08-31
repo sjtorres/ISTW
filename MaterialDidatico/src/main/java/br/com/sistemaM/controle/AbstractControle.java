@@ -42,7 +42,7 @@ public abstract class AbstractControle<T> implements Serializable {
             layoutForm = true;
             layoutView = false;
         } catch (InstantiationException | IllegalAccessException ex) {
-            mensagem("Erro ao instanciar " + ex.getMessage(), FacesMessage.SEVERITY_FATAL);
+            mensagem("Erro ao instanciar ", FacesMessage.SEVERITY_FATAL, ex.getMessage());
         }
     }
 
@@ -62,10 +62,11 @@ public abstract class AbstractControle<T> implements Serializable {
     public String salvar() {
         try {
             getFacade().salvar(entidade);
-            mensagem("Salvo com sucesso: ", FacesMessage.SEVERITY_INFO);
+            mensagem("Salvo com sucesso ", FacesMessage.SEVERITY_INFO, "");
             return "list?faces-redirect=true";
         } catch (Exception ex) {
-            mensagem("Erro ao salvar: " + ex.getMessage(), FacesMessage.SEVERITY_FATAL);
+            ex.printStackTrace();
+            mensagem("Erro ao salvar", FacesMessage.SEVERITY_FATAL, ex.getMessage());
         }
         return null;
     }
@@ -73,10 +74,11 @@ public abstract class AbstractControle<T> implements Serializable {
     public String excluir() {
         try {
             getFacade().excluir(entidade);
-            mensagem("Excluido com sucesso: ", FacesMessage.SEVERITY_INFO);
+            mensagem("Excluido com sucesso ", FacesMessage.SEVERITY_INFO, "");
             return "list?faces-redirect=true";
         } catch (Exception ex) {
-            mensagem("Erro ao excluir: " + ex.getMessage(), FacesMessage.SEVERITY_FATAL);
+            ex.printStackTrace();
+            mensagem("Erro ao excluir", FacesMessage.SEVERITY_FATAL, ex.getMessage());
         }
         return null;
     }
@@ -110,13 +112,11 @@ public abstract class AbstractControle<T> implements Serializable {
     }
 
     public void onRowEdit(RowEditEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Sucesso!", "Celula Editada");
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        mensagem("Sucesso!", FacesMessage.SEVERITY_WARN, "Celula Editada");
     }
      
     public void onRowCancel(RowEditEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção!", "Edit Cancelado");
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        mensagem("Atenção!", FacesMessage.SEVERITY_WARN, "Edit Cancelado");
     }
      
     public void onCellEdit(CellEditEvent event) {
@@ -124,13 +124,12 @@ public abstract class AbstractControle<T> implements Serializable {
         Object newValue = event.getNewValue();
          
         if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Celula Editada", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            mensagem("Celula Editada", FacesMessage.SEVERITY_INFO, "Old: " + oldValue + ", New:" + newValue);
         }
     }
     
-    protected void mensagem(String msg, FacesMessage.Severity tipo) {
-        FacesMessage message = new FacesMessage(tipo, msg, "");
+    protected void mensagem(String msg, FacesMessage.Severity tipo, String detail) {
+        FacesMessage message = new FacesMessage(tipo, msg, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 

@@ -35,7 +35,10 @@ and open the template in the editor.
                             <p:column headerText="Nome">
                                 <h:outputText value="#{item.nome}"/>
                             </p:column>
-                            <p:column headerText="Código de Acesso">
+                            <p:column headerText="Professor">
+                                <h:outputText value="#{item.usuario.nome}"/>
+                            </p:column>
+                            <p:column headerText="Código de Acesso" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}">
                                 <h:outputText value="#{item.codAcesso}"/>
                             </p:column>
                             <f:facet name="footer">
@@ -60,7 +63,7 @@ and open the template in the editor.
                                                  disabled="#{disciplinaControle.entidade==null}"
                                                  value="Excluir"
                                                  action="#{disciplinaControle.excluir()}"
-                                                 ajax="false">
+                                                 update="message disciplina">
 
                                     <p:confirm header="Confirmação" 
                                                message="Deseja excluir o registro?" 

@@ -6,6 +6,7 @@
 package br.com.sistemaM.entidade;
 
 import br.com.sistemaM.enums.NivelAcesso;
+import br.com.sistemaM.utils.Criptografia;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import br.com.sistemaM.utils.Criptografia;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import org.hibernate.envers.Audited;
 
 /**
@@ -43,6 +50,42 @@ public class Usuario implements Serializable {
     @Column(name = "usu_nivel", nullable = false)
     @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "usuario",
+            orphanRemoval = true)
+    private List<ItemDisciplina> itensDisciplina = new ArrayList<>();
+
+    @Transient
+    private ItemDisciplina itemDisciplina = new ItemDisciplina();
+
+    public void addItem(Disciplina d, Usuario u) throws Exception {
+        boolean contem = false;
+        itemDisciplina = new ItemDisciplina();
+        itemDisciplina.setDisciplina(d);
+        itemDisciplina.setUsuario(u);
+        for (ItemDisciplina i : itensDisciplina) {
+            if (i.getDisciplina().equals(itemDisciplina.getDisciplina()) && i.getUsuario().equals(itemDisciplina.getUsuario())) {
+                contem = true;
+                throw new Exception("O ItemDisciplina já está adicionado");
+            }
+        }
+        if (!contem) {
+            itensDisciplina.add(itemDisciplina);
+        }
+    }
+
+    public void removeItem(ItemDisciplina item) {
+        itensDisciplina.remove(item);
+    }
+
+    public ItemDisciplina getItemDisciplina() {
+        return itemDisciplina;
+    }
+
+    public void setItemDisciplina(ItemDisciplina itemDisciplina) {
+        this.itemDisciplina = itemDisciplina;
+    }
 
     public Long getId() {
         return id;
@@ -57,7 +100,7 @@ public class Usuario implements Serializable {
     }
 
     public void setLogin(String login) {
-        this.login = login.toLowerCase();
+        this.login = login;
     }
 
     public String getNome() {
@@ -90,6 +133,14 @@ public class Usuario implements Serializable {
 
     public void setNivelAcesso(NivelAcesso nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
+    }
+
+    public List<ItemDisciplina> getItensDisciplina() {
+        return itensDisciplina;
+    }
+
+    public void setItensDisciplina(List<ItemDisciplina> itensDisciplina) {
+        this.itensDisciplina = itensDisciplina;
     }
 
     @Override

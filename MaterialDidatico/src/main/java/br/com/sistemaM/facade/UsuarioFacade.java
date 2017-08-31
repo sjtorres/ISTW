@@ -6,12 +6,14 @@
 package br.com.sistemaM.facade;
 
 import br.com.sistemaM.entidade.Usuario;
+import br.com.sistemaM.enums.NivelAcesso;
 import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import br.com.sistemaM.persistencia.Transacional;
 import br.com.sistemaM.utils.Criptografia;
+import java.util.List;
 
 /**
  *
@@ -33,11 +35,26 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements Serializab
     }
 
     public Usuario pesquisaUsuario(String login, String senha) {
-        Query query = em.createQuery("FROM Usuario AS u WHERE u.login='" + login + "' AND u.senha='" + Criptografia.md5(senha) + "'");
-        if (query.getResultList().size() == 1) {
-            return (Usuario) query.getResultList().get(0);
+        Query q = em.createQuery("FROM Usuario AS u WHERE u.login='" + login + "' AND u.senha='" + Criptografia.md5(senha) + "'");
+        if (q.getResultList().size() == 1) {
+            return (Usuario) q.getSingleResult();
         }
         return null;
+    }
+
+    public List<Usuario> listarAlunoProfessor(String login) {
+        Query q = em.createQuery("FROM Usuario AS u WHERE u.login='" + login + "'");
+        return q.getResultList();
+    }
+
+    public List<Usuario> autoCompleteProfessor(Usuario u) {
+        if (u.getNivelAcesso().equals(NivelAcesso.MASTER)) {
+            Query q = em.createQuery("FROM Usuario AS u WHERE u.nivelAcesso='" + NivelAcesso.PROFESSOR + "'");
+            return q.getResultList();
+        } else {
+            Query q = em.createQuery("FROM Usuario AS u WHERE u.login='" + u.getLogin() + "' AND u.nivelAcesso='" + NivelAcesso.PROFESSOR + "'");
+            return q.getResultList();
+        }
     }
 
 }
