@@ -6,20 +6,15 @@
 package br.com.sistemaM.entidade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.hibernate.envers.Audited;
 
 /**
@@ -43,11 +38,9 @@ public class Disciplina implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "disciplina",
-            orphanRemoval = true)
-    private List<ItemDisciplina> itensDisciplina = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usu_id", nullable = false)
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -81,35 +74,12 @@ public class Disciplina implements Serializable {
         this.curso = curso;
     }
 
-    public List<ItemDisciplina> getItensDisciplina() {
-        return itensDisciplina;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setItensDisciplina(List<ItemDisciplina> itensDisciplina) {
-        this.itensDisciplina = itensDisciplina;
-    }
-
-    @Transient
-    private ItemDisciplina itemDisciplina = new ItemDisciplina();
-
-    public void addItem(ItemDisciplina item) throws Exception {
-        if (!itensDisciplina.contains(item)) {
-            itensDisciplina.add(item);
-        } else {
-            throw new Exception("O ItemDisciplina já está adicionado");
-        }
-    }
-
-    public void removeItem(ItemDisciplina item) {
-        itensDisciplina.remove(item);
-    }
-
-    public ItemDisciplina getItemDisciplina() {
-        return itemDisciplina;
-    }
-
-    public void setItemDisciplina(ItemDisciplina itemDisciplina) {
-        this.itemDisciplina = itemDisciplina;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

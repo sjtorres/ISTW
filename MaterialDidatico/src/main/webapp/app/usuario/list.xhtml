@@ -16,7 +16,7 @@ and open the template in the editor.
             <h:panelGroup rendered="#{usuarioControle.layoutList}">
                 <h:form>
                     <p:panel header="USUÁRIO" style="font-size: small; text-align: center;">
-                        <p:dataTable value="#{usuarioControle.listar}"
+                        <p:dataTable id="usuario" value="#{usuarioControle.listar}"
                                      var="item" style="font-size: small;"
                                      paginator="true" rows="10"
                                      paginatorPosition="bottom"
@@ -45,6 +45,7 @@ and open the template in the editor.
                             <f:facet name="footer">
                                 <p:commandButton id="novo" icon="fa fa-plus" style="font-size: small;"
                                                  value="Novo"
+                                                 rendered="#{loginControle.usuario.nivelAcesso=='MASTER'}"
                                                  actionListener="#{usuarioControle.novo()}"
                                                  ajax="false"/>
 
@@ -62,9 +63,8 @@ and open the template in the editor.
 
                                 <p:commandButton id="excluir" icon="fa fa-trash-o" style="font-size: small;"
                                                  disabled="#{usuarioControle.entidade==null}"
-                                                 value="Excluir"
-                                                 action="#{usuarioControle.excluir()}"
-                                                 ajax="false">
+                                                 value="Excluir" update="message usuario"
+                                                 actionListener="#{usuarioControle.excluir()}">
                                     
                                     <p:confirm header="Confirmação" 
                                                message="Deseja excluir o registro?" 

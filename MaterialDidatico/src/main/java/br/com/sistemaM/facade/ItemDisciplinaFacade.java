@@ -5,9 +5,11 @@
  */
 package br.com.sistemaM.facade;
 
+import br.com.sistemaM.entidade.Curso;
 import br.com.sistemaM.entidade.ItemDisciplina;
 import br.com.sistemaM.persistencia.Transacional;
 import java.io.Serializable;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -30,4 +32,17 @@ public class ItemDisciplinaFacade extends AbstractFacade<ItemDisciplina> impleme
     public EntityManager getEm() {
         return em;
     }
+    
+    public List<ItemDisciplina> listarProfessor(String login) {
+        Query q = em.createQuery("FROM ItemDisciplina AS id WHERE id.usuario.login = '" + login + "'");
+//        Query q = em.createQuery("FROM Disciplina AS d INNER JOIN d.curso AS c WHERE d.usuario.login = '" + login + "'");
+        return q.getResultList();
+    }
+    
+    public List<ItemDisciplina> listarAluno(String login) {
+        Query q = em.createQuery("FROM ItemDisciplina AS id WHERE id.usuario.login = '" + login + "'");
+//        Query q = em.createQuery("FROM Disciplina AS d INNER JOIN d.curso AS c INNER JOIN d.itensDisciplina AS i WHERE i.usuario.login = '" + login + "'");
+        return q.getResultList();
+    }
+      
 }

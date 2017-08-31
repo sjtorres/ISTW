@@ -6,6 +6,7 @@
 package br.com.sistemaM.controle;
 
 import br.com.sistemaM.entidade.Usuario;
+import br.com.sistemaM.enums.NivelAcesso;
 import br.com.sistemaM.facade.UsuarioFacade;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -45,6 +46,7 @@ public class LoginControle implements Serializable {
     }
 
     public String logoff() {
+        usuario = new Usuario();
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saindo do Sistema", "");
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -53,6 +55,7 @@ public class LoginControle implements Serializable {
 
     public String cadastroUsuario() {
         usuario = new Usuario();
+        usuario.setNivelAcesso(NivelAcesso.MASTER);
         return "usuario.xhtml";
     }
 

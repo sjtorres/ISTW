@@ -5,6 +5,7 @@
  */
 package br.com.sistemaM.facade;
 
+import br.com.sistemaM.entidade.Disciplina;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -60,6 +61,11 @@ public abstract class AbstractFacade<T> implements Serializable {
     public List<T> AutoCompletePorNome(String nome) {
         Query q = getEm().createQuery("FROM " + classe.getSimpleName() + " AS t WHERE t.nome LIKE ('%" + nome + "%')");
         return q.getResultList();
+    }
+    
+    public Disciplina BuscarDisciplinaPeloCodAcesso(String codAcesso) {
+        Query q = getEm().createQuery("FROM Disciplina AS d WHERE d.codAcesso = '" + codAcesso + "'");
+        return (Disciplina) q.getSingleResult();
     }
 
 }

@@ -11,6 +11,7 @@ import br.com.sistemaM.facade.AbstractFacade;
 import br.com.sistemaM.facade.UsuarioFacade;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,26 +22,48 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class UsuarioControle extends AbstractControle<Usuario>  implements Serializable {
+public class UsuarioControle extends AbstractControle<Usuario> implements Serializable {
 
     private Usuario usuario;
     @Inject
     private UsuarioFacade usuarioFacade;
-    
+    @Inject
+    private LoginControle loginControle;
+    private String codAcesso;
+
     public UsuarioControle() {
         super(Usuario.class);
     }
-    
+
     @Override
     public AbstractFacade<Usuario> getFacade() {
         return usuarioFacade;
     }
 
-    public List<Usuario> getListagem() throws Exception {
-        return usuarioFacade.listar();
+    @Override
+    public List<Usuario> getListar() throws Exception {
+        try {
+            if (!loginControle.getUsuario().getNivelAcesso().equals(NivelAcesso.MASTER)) {
+                return usuarioFacade.listarAlunoProfessor(loginControle.getUsuario().getLogin());
+            }
+            return super.getListar();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mensagem("Erro ao buscar do banco", FacesMessage.SEVERITY_FATAL, "");
+            return null;
+        }
     }
-    
-    public NivelAcesso[] getNiveisAcesso(){
+
+    public List<Usuario> autoCompleteProfessor(String nome) {
+        return usuarioFacade.autoCompleteProfessor(loginControle.getUsuario());
+    }
+
+    public void addItem() throws Exception {
+        super.setEntidade(loginControle.getUsuario());
+        super.getEntidade().addItem(usuarioFacade.BuscarDisciplinaPeloCodAcesso(codAcesso), loginControle.getUsuario());
+    }
+
+    public NivelAcesso[] getNiveisAcesso() {
         return NivelAcesso.values();
     }
 
@@ -50,6 +73,14 @@ public class UsuarioControle extends AbstractControle<Usuario>  implements Seria
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getCodAcesso() {
+        return codAcesso;
+    }
+
+    public void setCodAcesso(String codAcesso) {
+        this.codAcesso = codAcesso;
     }
 
 }
