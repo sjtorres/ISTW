@@ -19,12 +19,30 @@ and open the template in the editor.
                     <p:inputText id="nome" style="width:90%;"
                                  required="true"
                                  requiredMessage="O Nome é obrigatório"
-                                 value="#{materialControle.entidade.nome}">
+                                 value="#{materialControle.nome}">
                         <p:focus for="nome"/>
                     </p:inputText>
                     
+                     <p:outputLabel value="Disciplina:" for="disciplina"/>
+                    
+                        <p:autoComplete id="disciplina" maxResults="5" dropdown="true"
+                                        completeMethod="#{disciplinaControle.AutoCompletePorNome}" 
+                                        value="#{materialControle.disciplina}"
+                                        converter="#{disciplinaControle.converter()}"
+                                        var="item"
+                                        itemLabel="#{item.nome}"
+                                        itemValue="#{item}"/>
+                      
+                    
                 </h:panelGrid>
+                <h:panelGrid id="painelupload" columns="1">
+                    
+                    <p:fileUpload fileUploadListener="#{materialControle.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                  label="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar" 
+                                  update="messages" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|ppt|pps|pdf)$/" />
 
+                         <p:growl id="messages" showDetail="true" />
+                </h:panelGrid>
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;font-family: cursive;"
                                      action="#{materialControle.salvar()}"
