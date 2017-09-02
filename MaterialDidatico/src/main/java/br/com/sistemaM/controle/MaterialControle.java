@@ -120,7 +120,7 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
         try {
             UploadedFile arq = event.getFile();
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            String caminho = "C:\\Users\\Belatriz\\Documents\\GitHub\\Projeto\\MaterialDidatico\\src\\main\\webapp\\imagens\\Upload\\" + arq.getFileName();
+            String caminho = "D:\\trabalho e estudo\\MaterialDidatico\\src\\main\\webapp\\imagens\\Upload\\" + arq.getFileName();
             File fileAnexo = new File(caminho);
             fileAnexo.getParentFile().mkdirs();
             extensao = arq.getFileName().substring(arq.getFileName().lastIndexOf("."), arq.getFileName().length());

@@ -33,8 +33,8 @@ public class CursoFacade extends AbstractFacade<Curso> implements Serializable{
     }
     
     public List<Curso> listarProfessor(String login) {
-        Query q = em.createQuery("FROM curso AS c");
-//        Query q = em.createQuery("FROM Disciplina AS d INNER JOIN d.curso AS c WHERE d.usuario.login = '" + login + "'");
+        Query q = em.createQuery("FROM curso AS c INNER JOIN Disciplina AS d on (d.curso.id = c.id) WHERE d.usuario.login = '" + login + "'");
+        System.out.println("tamanho da lista: " + q.getResultList().size());
         return q.getResultList();
     }
     

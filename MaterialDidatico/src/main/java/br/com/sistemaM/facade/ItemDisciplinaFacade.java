@@ -5,7 +5,6 @@
  */
 package br.com.sistemaM.facade;
 
-import br.com.sistemaM.entidade.Curso;
 import br.com.sistemaM.entidade.ItemDisciplina;
 import br.com.sistemaM.persistencia.Transacional;
 import java.io.Serializable;

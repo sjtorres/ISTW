@@ -9,11 +9,13 @@ import br.com.sistemaM.entidade.Usuario;
 import br.com.sistemaM.enums.NivelAcesso;
 import br.com.sistemaM.facade.UsuarioFacade;
 import java.io.Serializable;
+import javax.el.ValueExpression;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -46,16 +48,15 @@ public class LoginControle implements Serializable {
     }
 
     public String logoff() {
-        usuario = new Usuario();
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saindo do Sistema", "");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        return "/login";
+        return "/login?faces-redirect=true";
     }
 
     public String cadastroUsuario() {
         usuario = new Usuario();
-        usuario.setNivelAcesso(NivelAcesso.MASTER);
+        usuario.setNivelAcesso(NivelAcesso.ALUNO);
         return "usuario.xhtml";
     }
 
