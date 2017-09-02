@@ -12,10 +12,14 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
-        <title>LOGIN</title>
+        <title>SGD | Login</title>
+
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Conpatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="shortcut icon" type="image/x-icon" href="/MaterialDidatico/imagens/favicon.ico"/>
+        <link rel="stylesheet" href="/MaterialDidatico/css/style.css"/>
 
         <!-- Bootstrap -->
         <link href="/MaterialDidatico/css/login.css" rel="stylesheet"/>
@@ -23,33 +27,33 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4 col-md-offset-4">
-                        <h1 class="text-center login-title">Faça login para continuar com o SGD</h1>
-                        <div class="account-wall" style="padding: 25px;">
-                            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                                 alt=""/>
-                            <h:form styleClass="form-signin">
-                                <p:inputText styleClass="form-control" id="login" placeholder="Usuário" value="#{loginControle.login}">
-                                    <p:focus for="login"/>
-                                </p:inputText>
-                                <p:password styleClass="form-control" id="senha" placeholder="Senha" value="#{loginControle.senha}"/>
-                                <p:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Acessar" 
-                                                 action="#{loginControle.logar()}"
-                                                 ajax="false"/>
-                                <p:messages style="font-size: small;" closable="true"/>
-                                <label class="checkbox pull-left">
-                                    <input type="checkbox" value="lembre de mim"/>
-                                    Lembre de Mim
-                                </label>
-                                <a href="#" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
-                            </h:form>
-                        </div>
-                        <a href="#{loginControle.cadastroUsuario()}" class="text-center new-account">Crie a sua conta aqui! </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4">
+                    <h1 class="text-center login-title">Faça login para continuar com o SGD</h1>
+                    <div class="account-wall" style="padding: 25px;">
+                        <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                             alt=""/>
+                        <h:form styleClass="form-signin">
+                            <p:inputText styleClass="form-control" id="login" placeholder="Usuário" value="#{loginControle.login}">
+                                <p:focus for="login"/>
+                            </p:inputText>
+                            <p:password styleClass="form-control" id="senha" placeholder="Senha" value="#{loginControle.senha}"/>
+                            <p:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Acessar" 
+                                             action="#{loginControle.logar()}"
+                                             ajax="false"/>
+                            <p:messages style="font-size: small;" closable="true"/>
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" value="lembre de mim"/>
+                                Lembre de Mim
+                            </label>
+                            <a href="#" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
+                        </h:form>
                     </div>
+                    <a href="#{loginControle.cadastroUsuario()}" class="text-center new-account">Crie a sua conta aqui! </a>
                 </div>
             </div>
+        </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
