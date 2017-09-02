@@ -46,16 +46,15 @@ public class LoginControle implements Serializable {
     }
 
     public String logoff() {
-        usuario = new Usuario();
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saindo do Sistema", "");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        return "/login";
+        return "/login?faces-redirect=true";
     }
 
     public String cadastroUsuario() {
         usuario = new Usuario();
-        usuario.setNivelAcesso(NivelAcesso.MASTER);
+        usuario.setNivelAcesso(NivelAcesso.ALUNO);
         return "usuario.xhtml";
     }
 
