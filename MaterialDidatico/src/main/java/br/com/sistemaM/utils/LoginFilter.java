@@ -40,7 +40,7 @@ public class LoginFilter implements Filter {
         } else {
             HttpServletResponse res = (HttpServletResponse) response;
             HttpServletRequest req = (HttpServletRequest) request;
-            res.sendRedirect(req.getContextPath()+"/restricao.xhtml");
+            res.sendRedirect(req.getContextPath() + "/restricao.xhtml");
         }
     }
 

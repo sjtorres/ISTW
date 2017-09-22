@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -27,7 +22,7 @@ and open the template in the editor.
         <p:messages id="message" autoUpdate="true" closable="true"/>
 
         <nav class="navbar navbar-default" role="navigation">
-<!--             Marca e alterna agrupados para melhor exibição móvel -->
+             <!--Marca e alterna agrupados para melhor exibição móvel--> 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -41,17 +36,17 @@ and open the template in the editor.
              <!--Coletar os links, formulários e outros conteúdos de navegação para alternar--> 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/MaterialDidatico/index.xhtml">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastro <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Usuário</a></li>
-                            <li><a href="#">Curso</a></li>
-                            <li><a href="#">Disciplina</a></li>
-                            <li><a href="#">Material</a></li>
+                            <li><a href="/MaterialDidatico/app/usuario/list.xhtml">Usuário</a></li>
+                            <li><a href="/MaterialDidatico/app/curso/list.xhtml">Curso</a></li>
+                            <li><a href="/MaterialDidatico/app/disciplina/list.xhtml">Disciplina</a></li>
+                            <li><a href="/MaterialDidatico/app/material/list.xhtml">Material</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Sair</a></li>
+                    
                 </ul>
             </div>
         </nav>
@@ -64,20 +59,20 @@ and open the template in the editor.
                             <p:menubar styleClass="navbar navbar-default">
                                 <p:menuitem value="Home" icon="fa fa-home"  style="font-size: small;"
                                             url="/index.xhtml"/>
-                                <p:submenu label="Cadastros" icon="fa fa-database" style="font-size: small;" rendered="#{loginControle.logado==true}">
+                                <p:submenu label="Cadastros" icon="fa fa-database" style="font-size: small;" rendered="{loginControle.logado==true}">
                                     <p:menuitem value="Usuário" icon="fa fa-users" style="font-size: small;"
                                                 url="/app/usuario/list.xhtml"/>
                                     <p:menuitem value="Curso" icon="fa fa-users" style="font-size: small;"
-                                                url="/app/curso/list.xhtml" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
+                                                url="/app/curso/list.xhtml" rendered="{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
                                     <p:menuitem value="Disciplina" icon="fa fa-users" style="font-size: small;"
                                                 url="/app/disciplina/list.xhtml"/>
                                     <p:menuitem value="Material" icon="fa fa-users" style="font-size: small;"
-                                                url="/app/material/list.xhtml" rendered="#{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
+                                                url="/app/material/list.xhtml" rendered="{loginControle.usuario.nivelAcesso!='ALUNO'}"/>
                                 </p:submenu>
-                                <p:menuitem value="Logar" icon="fa fa-unlock" style="font-size: small;" rendered="#{loginControle.logado!=true}"
+                                <p:menuitem value="Logar" icon="fa fa-unlock" style="font-size: small;" rendered="{loginControle.logado!=true}"
                                             url="/login.xhtml"/>
-                                <p:menuitem value="Sair" icon="fa fa-lock" style="font-size: small;" rendered="#{loginControle.logado==true}"
-                                            action="#{loginControle.logoff()}"/>
+                                <p:menuitem value="Sair" icon="fa fa-lock" style="font-size: small;" rendered="{loginControle.logado==true}"
+                                            action="{loginControle.logoff()}"/>
                             </p:menubar>
                         </h:form>-->
 
