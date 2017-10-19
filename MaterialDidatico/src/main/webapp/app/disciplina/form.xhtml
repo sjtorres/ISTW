@@ -16,7 +16,7 @@ and open the template in the editor.
                 <h:panelGrid id="painelProfessor" columns="2">
 
                     <p:outputLabel value="Nome:" for="nome"/>
-                    <p:inputText id="nome" style="width:90%;"
+                    <p:inputText id="nome"
                                  required="true"
                                  requiredMessage="O Nome é obrigatório"
                                  value="#{disciplinaControle.entidade.nome}">
@@ -24,7 +24,7 @@ and open the template in the editor.
                     </p:inputText>
 
                     <p:outputLabel value="Professor:" for="professor"/>
-                    <p:autoComplete id="professor" maxResults="5" dropdown="true"
+                    <p:autoComplete id="professor" maxResults="5" dropdown="true" size="16"
                                     completeMethod="#{usuarioControle.autoCompleteProfessor}" 
                                     value="#{disciplinaControle.entidade.usuario}"
                                     converter="#{usuarioControle.converter()}"
@@ -33,7 +33,7 @@ and open the template in the editor.
                                     itemValue="#{item}"/>
 
                     <p:outputLabel value="Curso:" for="curso"/>
-                    <p:autoComplete id="curso" maxResults="5" dropdown="true"
+                    <p:autoComplete id="curso" maxResults="5" dropdown="true" size="16"
                                     completeMethod="#{cursoControle.AutoCompletePorNome}" 
                                     value="#{disciplinaControle.entidade.curso}"
                                     converter="#{cursoControle.converter()}"
