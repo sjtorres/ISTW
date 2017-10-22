@@ -29,7 +29,6 @@ public class UsuarioControle extends AbstractControle<Usuario> implements Serial
     private UsuarioFacade usuarioFacade;
     @Inject
     private LoginControle loginControle;
-    private String codAcesso;
 
     public UsuarioControle() {
         super(Usuario.class);
@@ -58,11 +57,6 @@ public class UsuarioControle extends AbstractControle<Usuario> implements Serial
         return usuarioFacade.autoCompleteProfessor(loginControle.getUsuario());
     }
 
-    public void addItem() throws Exception {
-        super.setEntidade(loginControle.getUsuario());
-        super.getEntidade().addItem(usuarioFacade.BuscarDisciplinaPeloCodAcesso(codAcesso), loginControle.getUsuario());
-    }
-
     public NivelAcesso[] getNiveisAcesso() {
         return NivelAcesso.values();
     }
@@ -73,14 +67,6 @@ public class UsuarioControle extends AbstractControle<Usuario> implements Serial
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getCodAcesso() {
-        return codAcesso;
-    }
-
-    public void setCodAcesso(String codAcesso) {
-        this.codAcesso = codAcesso;
     }
 
 }

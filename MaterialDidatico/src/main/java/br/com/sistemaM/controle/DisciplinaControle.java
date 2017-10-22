@@ -32,6 +32,7 @@ public class DisciplinaControle extends AbstractControle<Disciplina> implements 
     private Disciplina disciplina;
     @Inject
     private LoginControle loginControle;
+    private String codAcesso;
 
     public DisciplinaControle() {
         super(Disciplina.class);
@@ -49,6 +50,12 @@ public class DisciplinaControle extends AbstractControle<Disciplina> implements 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
     }
+    
+    public void addItem() throws Exception {
+        disciplina = disciplinaFacade.BuscarDisciplinaPeloCodAcesso(codAcesso);
+        super.setEntidade(disciplina);
+        super.getEntidade().addItem(disciplina, loginControle.getUsuario());
+    }
 
     @Override
     public List<Disciplina> getListar() throws Exception {
@@ -64,6 +71,14 @@ public class DisciplinaControle extends AbstractControle<Disciplina> implements 
             mensagem("Erro ao buscar do banco", FacesMessage.SEVERITY_FATAL, "");
             return null;
         }
+    }
+
+    public String getCodAcesso() {
+        return codAcesso;
+    }
+
+    public void setCodAcesso(String codAcesso) {
+        this.codAcesso = codAcesso;
     }
 
     @Override
