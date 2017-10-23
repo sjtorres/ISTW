@@ -50,28 +50,6 @@ public class Usuario implements Serializable {
     @Column(name = "usu_nivel", nullable = false)
     @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "usuario",
-            orphanRemoval = true)
-    private List<ItemDisciplina> itensDisciplina = new ArrayList<>();
-
-    @Transient
-    private ItemDisciplina itemDisciplina = new ItemDisciplina();
-
-    public void addItem(Disciplina d, Usuario u) throws Exception {
-        boolean contem = false;
-        itemDisciplina = new ItemDisciplina();
-        itemDisciplina.setDisciplina(d);
-        itemDisciplina.setUsuario(u);
-        for (ItemDisciplina i : itensDisciplina) {
-            if (i.getDisciplina().equals(itemDisciplina.getDisciplina()) && i.getUsuario().equals(itemDisciplina.getUsuario())) {
-                contem = true;
-                throw new Exception("O ItemDisciplina já está adicionado");
-            }
-        }
-        if (!contem) {
-            itensDisciplina.add(itemDisciplina);
 
     public Long getId() {
         return id;

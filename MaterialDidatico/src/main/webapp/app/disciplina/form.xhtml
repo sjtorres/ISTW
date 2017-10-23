@@ -58,17 +58,17 @@ and open the template in the editor.
                 <h:panelGrid id="painelAluno" columns="2">
 
                     <p:outputLabel value="Código de Acesso:" for="codAcesso"/>
-                    <p:inputText id="codAcesso" value="#{usuarioControle.codAcesso}"/>
+                    <p:inputText id="codAcesso" value="#{disciplinaControle.codAcesso}"/>
 
                     <f:facet name="footer">
                         <p:commandButton id="bottaoAdicionarDisciplina" value="ADICIONAR" icon="fa fa-plus" 
-                                         action="#{usuarioControle.addItem()}"
+                                         action="#{disciplinaControle.addItem()}"
                                          ajax="false"/>
                     </f:facet>
                 </h:panelGrid>
 
                 <p:panel id="painelDisciplina" header="DISCIPLINAS">
-                    <p:dataTable value="#{usuarioControle.entidade.itensDisciplina}" 
+                    <p:dataTable value="#{disciplinaControle.entidade.itensDisciplina}" 
                                  var="item" 
                                  emptyMessage="Disciplinas não encontradas"
                                  editable="true"
@@ -85,7 +85,6 @@ and open the template in the editor.
                         </p:column>
                         <p:column headerText="Remover" width="150" style="text-align:center">
                             <p:commandButton icon="fa fa-times"
-                                             action="#{usuarioControle.entidade.removeItem(item)}"
                                              action="#{disciplinaControle.entidade.removeItem(item)}"
                                              ajax="false"
                                              style="font-size: small;"/>
