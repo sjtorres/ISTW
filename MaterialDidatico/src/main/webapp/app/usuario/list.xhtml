@@ -63,6 +63,7 @@ and open the template in the editor.
 
                                 <p:commandButton id="excluir" icon="fa fa-trash-o" style="font-size: small;"
                                                  disabled="#{usuarioControle.entidade==null}"
+                                                 rendered="#{loginControle.usuario.nivelAcesso=='MASTER'}"
                                                  value="Excluir" update="message usuario"
                                                  actionListener="#{usuarioControle.excluir()}">
                                     

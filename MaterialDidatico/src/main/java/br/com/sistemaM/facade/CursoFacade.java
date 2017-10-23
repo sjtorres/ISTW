@@ -8,6 +8,7 @@ package br.com.sistemaM.facade;
 import br.com.sistemaM.entidade.Curso;
 import br.com.sistemaM.persistencia.Transacional;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -18,8 +19,8 @@ import javax.persistence.Query;
  * @author tiago
  */
 @Transacional
-public class CursoFacade extends AbstractFacade<Curso> implements Serializable{
-    
+public class CursoFacade extends AbstractFacade<Curso> implements Serializable {
+
     @Inject
     private EntityManager em;
 
@@ -31,17 +32,15 @@ public class CursoFacade extends AbstractFacade<Curso> implements Serializable{
     public EntityManager getEm() {
         return em;
     }
-    
+
     public List<Curso> listarProfessor(String login) {
-        Query q = em.createQuery("FROM curso AS c INNER JOIN Disciplina AS d on (d.curso.id = c.id) WHERE d.usuario.login = '" + login + "'");
-        System.out.println("tamanho da lista: " + q.getResultList().size());
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT DISTINCT (d.curso) FROM Disciplina AS d WHERE d.usuario.login = '" + login + "'");
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
-    
-    public List<Curso> listarAluno(String login) {
-        Query q = em.createQuery("FROM curso AS c");
-//        Query q = em.createQuery("FROM Usuario AS u INNER JOIN u.itensDisciplina AS i INNER JOIN i.disciplina AS d INNER JOIN d.curso AS c WHERE i.usuario.login = '" + login + "'");
-        return q.getResultList();
-    }
-      
+
 }

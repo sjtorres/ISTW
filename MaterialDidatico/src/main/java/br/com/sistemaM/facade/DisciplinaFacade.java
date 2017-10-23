@@ -33,14 +33,24 @@ public class DisciplinaFacade extends AbstractFacade<Disciplina> implements Seri
     }
 
     public List<Disciplina> listarProfessor(String login) {
-        Query q = em.createQuery("FROM Disciplina AS d WHERE d.usuario.login = '" + login + "'");
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT DISTINCT (d) FROM Disciplina AS d WHERE d.usuario.login = '" + login + "'");
+            System.out.println("lista: " + q.getResultList().toString());
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     public List<Disciplina> listarAluno(String login) {
-        Query q = em.createQuery("FROM Disciplina AS d WHERE d.usuario.login = '" + login + "'");
-//        Query q = em.createQuery("FROM Disciplina AS d, ItemDisciplina AS id WHERE id.disciplina.id=d.id AND id.usuario.login = '" + login + "'");
-//        Query q = em.createQuery("FROM Usuario AS u INNER JOIN u.itensDisciplina AS i INNER JOIN i.disciplina AS d WHERE i.usuario.login = '" + login + "'");
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT DISTINCT (id.disciplina) FROM ItemDisciplina AS id WHERE id.usuario.login = '" + login + "'");
+            System.out.println("lista: " + q.getResultList().toString());
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

@@ -18,8 +18,8 @@ import javax.persistence.Query;
  * @author tiago
  */
 @Transacional
-public class MaterialFacade extends AbstractFacade<Material> implements Serializable{
-    
+public class MaterialFacade extends AbstractFacade<Material> implements Serializable {
+
     @Inject
     private EntityManager em;
 
@@ -31,15 +31,27 @@ public class MaterialFacade extends AbstractFacade<Material> implements Serializ
     public EntityManager getEm() {
         return em;
     }
-    
+
     public List<Material> listarProfessor(String login) {
-        Query q = em.createQuery("FROM Material AS m INNER JOIN m.disciplina AS d WHERE d.usuario.login = '" + login + "'");
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT DISTINCT (m) FROM Material AS m WHERE m.disciplina.usuario.login = '" + login + "'");
+            System.out.println("lista: " + q.getResultList().toString());
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
-    
+
     public List<Material> listarAluno(String login) {
-//        falta fazer
-        Query q = em.createQuery("FROM Material AS m");
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT DISTINCT (m) FROM Material AS m, ItemDisciplina AS it "
+                    + "WHERE it.disciplina.id = m.disciplina.id AND it.usuario.login = '" + login + "'");
+            System.out.println("lista: " + q.getResultList().toString());
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

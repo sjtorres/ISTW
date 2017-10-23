@@ -40,12 +40,12 @@ public class Disciplina implements Serializable {
     private String nome;
     @Column(name = "dis_cod_acesso", nullable = false)
     private String codAcesso;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
-            mappedBy = "usuario",
+            mappedBy = "disciplina",
             orphanRemoval = true)
     private List<ItemDisciplina> itensDisciplina = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.ALL)

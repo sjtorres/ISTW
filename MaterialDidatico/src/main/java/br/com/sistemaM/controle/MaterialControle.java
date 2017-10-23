@@ -27,6 +27,7 @@ import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import java.util.Date;
+import org.primefaces.model.TreeNode;
 
 /**
  *
@@ -46,6 +47,7 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
     private Date dataCadastro;
     private Disciplina disciplina;
     private String nome;
+    private TreeNode root;
 
     public MaterialControle() {
         super(Material.class);
@@ -112,6 +114,14 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public TreeNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(TreeNode root) {
+        this.root = root;
     }
 
     public void handleFileUpload(FileUploadEvent event) {

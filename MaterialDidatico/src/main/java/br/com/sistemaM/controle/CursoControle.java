@@ -43,10 +43,7 @@ public class CursoControle extends AbstractControle<Curso> implements Serializab
     public List<Curso> getListar() throws Exception {
         try {
             if (loginControle.getUsuario().getNivelAcesso().equals(NivelAcesso.PROFESSOR)) {
-                System.out.println("login: " + loginControle.getUsuario().getLogin());
                 return cursoFacade.listarProfessor(loginControle.getUsuario().getLogin());
-            } else if (loginControle.getUsuario().getNivelAcesso().equals(NivelAcesso.ALUNO)) {
-                return cursoFacade.listarAluno(loginControle.getUsuario().getLogin());
             }
             return super.getListar();
         } catch (Exception e) {
