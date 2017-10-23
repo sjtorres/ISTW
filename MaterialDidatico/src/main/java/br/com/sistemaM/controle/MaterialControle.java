@@ -7,9 +7,7 @@ package br.com.sistemaM.controle;
 
 import br.com.sistemaM.entidade.Disciplina;
 import br.com.sistemaM.entidade.Material;
-import br.com.sistemaM.enums.NivelAcesso;
 import br.com.sistemaM.facade.AbstractFacade;
-import br.com.sistemaM.facade.DisciplinaFacade;
 import br.com.sistemaM.facade.MaterialFacade;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -17,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.List;
 import java.text.SimpleDateFormat;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -27,6 +24,10 @@ import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import java.util.Date;
+import org.primefaces.component.filedownload.FileDownloadActionListener;
+import org.primefaces.component.filedownload.FileDownloadTagHandler;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -37,10 +38,8 @@ import java.util.Date;
 public class MaterialControle extends AbstractControle<Material> implements Serializable {
 
     @Inject
-    private MaterialFacade materialFacade;
-    @Inject
-    private LoginControle loginControle;
-    private Material material;
+    private MaterialFacade habilidadeFacade;
+    private Material habilidade;
     private String extensao;
     private String nomeArq;
     private Date dataCadastro;
@@ -53,27 +52,9 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
 
     @Override
     public AbstractFacade<Material> getFacade() {
-        return materialFacade;
+        return habilidadeFacade;
     }
 
-    @Override
-    public List<Material> getListar() throws Exception {
-        if(loginControle.getUsuario().getNivelAcesso().equals(NivelAcesso.PROFESSOR)){
-            return materialFacade.listarProfessor(loginControle.getUsuario().getLogin());
-        } else if(loginControle.getUsuario().getNivelAcesso().equals(NivelAcesso.ALUNO)){
-            return materialFacade.listarAluno(loginControle.getUsuario().getLogin());
-        }
-        return super.getListar();
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-    
     public String getExtensao() {
         return extensao;
     }
@@ -98,6 +79,14 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
         this.dataCadastro = dataCadastro;
     }
 
+    public Material getHabilidade() {
+        return habilidade;
+    }
+
+    public void setHabilidade(Material habilidade) {
+        this.habilidade = habilidade;
+    }
+
     public Disciplina getDisciplina() {
         return disciplina;
     }
@@ -120,7 +109,7 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
         try {
             UploadedFile arq = event.getFile();
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            String caminho = "D:\\trabalho e estudo\\MaterialDidatico\\src\\main\\webapp\\imagens\\Upload\\" + arq.getFileName();
+            String caminho = "C:\\Users\\Belatriz\\Documents\\GitHub\\Projeto\\MaterialDidatico\\src\\main\\webapp\\imagens\\Upload\\" + arq.getFileName();
             File fileAnexo = new File(caminho);
             fileAnexo.getParentFile().mkdirs();
             extensao = arq.getFileName().substring(arq.getFileName().lastIndexOf("."), arq.getFileName().length());
@@ -134,6 +123,12 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
             e.printStackTrace();
         }
     }
+    public void handleFileDownload() {
+         StreamedContent file;
+        String caminho = "C:\\Users\\Belatriz\\Documents\\GitHub\\Projeto\\MaterialDidatico\\src\\main\\webapp\\imagens\\Upload\\" +  super.getEntidade().getNomearq();
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(caminho);
+        file = new DefaultStreamedContent(stream, "application/" + super.getEntidade().getFormato(), super.getEntidade().getNomearq());
+    }
 
     @Override
     public String salvar() {
@@ -145,8 +140,8 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
             m.setFormato(extensao);
             m.setDataCadastro(new Date());
             m.setDisciplina(disciplina);
-            materialFacade.salvar(m);
-            mensagem("Salvo com sucesso: ", FacesMessage.SEVERITY_INFO, "");
+            habilidadeFacade.salvar(m);
+            mensagem("Salvo com sucesso: ", FacesMessage.SEVERITY_INFO);
             voltar();
 
         } catch (Exception ex) {
@@ -156,5 +151,9 @@ public class MaterialControle extends AbstractControle<Material> implements Seri
         }
         return null;
 
+    }
+
+    private void mensagem(String salvo_com_sucesso_, FacesMessage.Severity SEVERITY_INFO) {
+      
     }
 }
