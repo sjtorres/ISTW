@@ -86,6 +86,7 @@ and open the template in the editor.
                         <p:column headerText="Remover" width="150" style="text-align:center">
                             <p:commandButton icon="fa fa-times"
                                              action="#{usuarioControle.entidade.removeItem(item)}"
+                                             action="#{disciplinaControle.entidade.removeItem(item)}"
                                              ajax="false"
                                              style="font-size: small;"/>
                         </p:column>
@@ -93,7 +94,7 @@ and open the template in the editor.
                 </p:panel>
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" icon="fa fa-save" style="font-size: small;"
-                                     action="#{usuarioControle.salvar()}" update="message"
+                                     action="#{disciplinaControle.salvar()}" update="message"
                                      ajax="false"/>
 
                     <p:commandButton value="Voltar" icon="fa fa-share" style="font-size: small;"

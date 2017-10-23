@@ -41,6 +41,28 @@ public class Disciplina implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usu_id", nullable = false)
     private Usuario usuario;
+        for (ItemDisciplina i : itensDisciplina) {
+            if (i.getDisciplina().equals(itemDisciplina.getDisciplina()) && i.getUsuario().equals(itemDisciplina.getUsuario())) {
+                contem = true;
+                throw new Exception("O ItemDisciplina já está adicionado");
+            }
+        }
+        if (!contem) {
+            itensDisciplina.add(itemDisciplina);
+        }
+    }
+
+    public void removeItem(ItemDisciplina item) {
+        itensDisciplina.remove(item);
+    }
+
+    public ItemDisciplina getItemDisciplina() {
+        return itemDisciplina;
+    }
+
+    public void setItemDisciplina(ItemDisciplina itemDisciplina) {
+        this.itemDisciplina = itemDisciplina;
+    }
 
     public Long getId() {
         return id;
@@ -80,6 +102,14 @@ public class Disciplina implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<ItemDisciplina> getItensDisciplina() {
+        return itensDisciplina;
+    }
+
+    public void setItensDisciplina(List<ItemDisciplina> itensDisciplina) {
+        this.itensDisciplina = itensDisciplina;
     }
 
     @Override

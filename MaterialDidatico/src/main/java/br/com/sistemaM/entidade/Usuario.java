@@ -72,20 +72,6 @@ public class Usuario implements Serializable {
         }
         if (!contem) {
             itensDisciplina.add(itemDisciplina);
-        }
-    }
-
-    public void removeItem(ItemDisciplina item) {
-        itensDisciplina.remove(item);
-    }
-
-    public ItemDisciplina getItemDisciplina() {
-        return itemDisciplina;
-    }
-
-    public void setItemDisciplina(ItemDisciplina itemDisciplina) {
-        this.itemDisciplina = itemDisciplina;
-    }
 
     public Long getId() {
         return id;
@@ -133,14 +119,6 @@ public class Usuario implements Serializable {
 
     public void setNivelAcesso(NivelAcesso nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
-    }
-
-    public List<ItemDisciplina> getItensDisciplina() {
-        return itensDisciplina;
-    }
-
-    public void setItensDisciplina(List<ItemDisciplina> itensDisciplina) {
-        this.itensDisciplina = itensDisciplina;
     }
 
     @Override
