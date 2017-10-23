@@ -37,6 +37,8 @@ public class ItemDisciplina implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dis_id", nullable = false)
     private Disciplina disciplina;
+    @Column(name = "idis_admin", nullable = false)
+    private boolean admin;
     
     public Long getId() {
         return id;
@@ -60,6 +62,14 @@ public class ItemDisciplina implements Serializable {
 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
     
     @Override
