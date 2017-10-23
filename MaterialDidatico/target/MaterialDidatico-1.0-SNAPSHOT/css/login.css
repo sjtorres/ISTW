@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Sandro J. Torres
 */
 
+.imgFundo {
+    background-image:url(../imagens/bg-body.jpg);
+    width: 100%;
+}
 .form-signin
 {
     max-width: 330px;
@@ -59,35 +63,43 @@ and open the template in the editor.
 }
 .login-title
 {
-    color: #555;
-    font-size: 18px;
+    margin: 0;
+    width: 100%;
+    color: #fff;
+    background-color: #1684c2;
+    padding: 20px;
+    font-size: 36px;
     font-weight: 400;
     display: block;
 }
+.p-title {
+    margin: 0 0 10px 0;
+    padding: 0 0 20px 0;
+    width: 100%;
+    color: #fff;
+    font-size: 22px;
+    background-color: #1684c2;
+} 
+.esqueciSenha {float: left;}
+.cadastroSenha {float: right;}
+.p-footer {
+    margin:40px 0 0 0;
+    padding: 20px;
+    width: 100%;
+    color: #fff;
+    font-size: 12px;
+    background-color: #1684c2;
+} 
 .profile-img
 {
-    width: 96px;
+    width: 130px;
     height: 96px;
     margin: 0 auto 10px;
     display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+    -moz-border-radius: 25%;
+    -webkit-border-radius: 25%;
+    border-radius: 25%;
 }
-.need-help
-{
-    margin-top: 10px;
-}
-.new-account
-{
-    display: block;
-    margin-top: 10px;
-}
-
-.img-responsive {
-    margin: 0 auto;
-}
-
-/*.ui-datalist-content{
-    border: 0px; 
-}*/
+.need-help {margin-top: 10px;}
+.new-account {display: block; margin-top: 10px;}
+.img-responsive {margin: 0 auto;}
