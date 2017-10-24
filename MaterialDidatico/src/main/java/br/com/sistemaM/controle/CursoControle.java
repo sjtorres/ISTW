@@ -60,5 +60,4 @@ public class CursoControle extends AbstractControle<Curso> implements Serializab
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-
 }
